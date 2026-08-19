@@ -80,6 +80,10 @@ func main() {
 	api1Url := "http://192.168.122.196:8081/health"
 	http.HandleFunc("/api2/"+CARNET+"/call-api1", callApiHandler("API1", api1Url, 1))
 
+	// Este es el endpoint para llamar a la API3
+	api3Url := "http://192.168.122.77:8083/health"
+	http.HandleFunc("/api2/"+CARNET+"/call-api3", callApiHandler("API3", api3Url, 2))
+
 	fmt.Println("API2 inicializada correctamente. Escuchando en el puerto 8082...")
 	if err := http.ListenAndServe(":8082", nil); err != nil {
 		fmt.Printf("Error al iniciar el servidor: %s\n", err)
