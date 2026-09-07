@@ -1,0 +1,9 @@
+# Ignorar binarios del kernel
+modulo_kernel/*.o
+modulo_kernel/*.ko
+modulo_kernel/*.mod
+modulo_kernel/*.mod.c
+modulo_kernel/*.mod.o
+modulo_kernel/modules.order
+modulo_kernel/Module.symvers
+modulo_kernel/.*.cmd
