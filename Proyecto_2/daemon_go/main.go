@@ -38,6 +38,8 @@ func main() {
 		os.Exit(0)
 	}()
 
+	go iniciarEscuchaEBPF()
+
 	// Loop Principal
 	for {
 		fmt.Println("\n--- Ejecutando ciclo de análisis (Esperate 20s) ---")

@@ -47,7 +47,7 @@ def print_event(cpu, data, size):
         event.pid_emisor, 
         event.pid_receptor, 
         event.sig
-    ))
+    ), flush=True)
 
 # Loop de escucha
 b["events"].open_perf_buffer(print_event)
