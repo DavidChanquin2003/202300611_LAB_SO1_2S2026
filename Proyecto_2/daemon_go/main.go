@@ -36,11 +36,9 @@ func main() {
 	for {
 		fmt.Println("\n--- Ejecutando ciclo de análisis (Esperate 20s) ---")
 
-		// Prueba temporal de guardado en base de datos
-		saveLog("Ciclo de daemon ejecutado exitosamente")
+		analizarProcesos()
 
-		// Aquí irá la lógica de lectura de /proc y gestión de contenedores
-
+		fmt.Println("Esperando 20 segundos para el siguiente ciclo...")
 		time.Sleep(20 * time.Second) // Ejecución cada 20 segundos
 	}
 }
