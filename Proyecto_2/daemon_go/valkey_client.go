@@ -41,3 +41,15 @@ func saveLog(mensaje string) {
 
 	rdb.LPush(ctx, "log_general", mensaje)
 }
+
+// clearRanking limpia la lista para que el top 5 siempre salga bien
+func clearRanking(rankingName string) {
+	rdb.Del(ctx, rankingName)
+}
+
+func saveRanking(rankingName string, score float64, nombreContenedor string) {
+	rdb.ZAdd(ctx, rankingName, redis.Z{
+		Score:  score,
+		Member: nombreContenedor,
+	})
+}

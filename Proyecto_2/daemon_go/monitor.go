@@ -4,6 +4,8 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"sort"
+	"strconv"
 	"strings"
 )
 
@@ -65,5 +67,30 @@ func analizarProcesos() {
 	}
 
 	fmt.Printf("Se analizaron un total de %d procesos del sistema.\n", len(procesos))
+
+	// TOP 5 RAM
+	sort.Slice(procesos, func(i, j int) bool {
+		ramI, _ := strconv.ParseFloat(strings.ReplaceAll(procesos[i].RAM, "%", ""), 64)
+		ramJ, _ := strconv.ParseFloat(strings.ReplaceAll(procesos[j].RAM, "%", ""), 64)
+		return ramI > ramJ // Mayor a menor
+	})
+
+	clearRanking("top_ram")
+	for i := 0; i < len(procesos) && i < 5; i++ {
+		valorRam, _ := strconv.ParseFloat(strings.ReplaceAll(procesos[i].RAM, "%", ""), 64)
+		saveRanking("top_ram", valorRam, procesos[i].Name+" ("+procesos[i].PID+")")
+	}
+
+	sort.Slice(procesos, func(i, j int) bool {
+		cpuI, _ := strconv.ParseFloat(procesos[i].CPU, 64)
+		cpuJ, _ := strconv.ParseFloat(procesos[j].CPU, 64)
+		return cpuI > cpuJ
+	})
+
+	clearRanking("top_cpu")
+	for i := 0; i < len(procesos) && i < 5; i++ {
+		valorCpu, _ := strconv.ParseFloat(procesos[i].CPU, 64)
+		saveRanking("top_cpu", valorCpu, procesos[i].Name+" ("+procesos[i].PID+")")
+	}
 	gestionarContenedores()
 }
