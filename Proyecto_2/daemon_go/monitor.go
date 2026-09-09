@@ -65,4 +65,5 @@ func analizarProcesos() {
 	}
 
 	fmt.Printf("Se analizaron un total de %d procesos del sistema.\n", len(procesos))
+	gestionarContenedores()
 }
