@@ -23,6 +23,12 @@ func main() {
 	fmt.Println("Configurando Cronjob para generador.sh...")
 	setupCronjob()
 
+	fmt.Println("Ejecutando script para cargar módulo del kernel...")
+	cmd := exec.Command("sudo", "bash", "../cargar_modulo.sh")
+	if err := cmd.Run(); err != nil {
+		fmt.Printf("Nota: El módulo ya estaba cargado o hubo un detalle (%v)\n", err)
+	}
+
 	// Manejo de cierre seguro (o sea cuando se presiona Ctrl+C)
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
