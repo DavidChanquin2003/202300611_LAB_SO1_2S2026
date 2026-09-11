@@ -46,8 +46,8 @@ func main() {
 
 		analizarProcesos()
 
-		fmt.Println("Esperando 20 segundos para el siguiente ciclo...")
-		time.Sleep(20 * time.Second) // Ejecución cada 20 segundos
+		fmt.Println("Esperando 5 segundos para el siguiente ciclo...")
+		time.Sleep(5 * time.Second) // Ejecución cada 5 segundos
 	}
 }
 
@@ -56,8 +56,8 @@ func setupCronjob() {
 	cwd, _ := os.Getwd()
 	scriptPath := cwd + "/../generador.sh"
 
-	// El comando agrega la tarea al crontab para ejecutarse cada 2 minutos
-	cmdStr := fmt.Sprintf("(crontab -l 2>/dev/null; echo \"*/2 * * * * %s\") | crontab -", scriptPath)
+	// El comando agrega la tarea al crontab para ejecutarse cada minuto
+	cmdStr := fmt.Sprintf("(crontab -l 2>/dev/null; echo \"* * * * * %s\") | crontab -", scriptPath)
 	exec.Command("bash", "-c", cmdStr).Run()
 }
 
