@@ -7,7 +7,8 @@ services:
     ports:
       - "6379:6379"
     restart: always
-
+    volumes:
+      - valkey_data:/data
   grafana:
     image: grafana/grafana:latest
     container_name: grafana_dashboard
@@ -20,3 +21,9 @@ services:
     depends_on:
       - valkey
     restart: always
+    volumes:
+      - grafana_data:/var/lib/grafana
+      
+volumes:
+  valkey_data:
+  grafana_data:

@@ -42,7 +42,7 @@ func main() {
 
 	// Loop Principal
 	for {
-		fmt.Println("\n--- Ejecutando ciclo de análisis (Esperate 20s) ---")
+		fmt.Println("\n--- Ejecutando ciclo de análisis (Esperate unos segundos) ---")
 
 		analizarProcesos()
 
