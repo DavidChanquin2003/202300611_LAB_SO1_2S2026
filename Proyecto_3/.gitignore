@@ -1,0 +1,7 @@
+# .gitignore
+/api-rust/target/
+*.exe
+*.out
+*.log
+.DS_Store
+.env
