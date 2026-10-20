@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: api-rust
-        image: host.minikube.internal:5000/api-rust:v1
+        image: host.minikube.internal:5000/api-rust:v2
         ports:
         - containerPort: 8080
 ---

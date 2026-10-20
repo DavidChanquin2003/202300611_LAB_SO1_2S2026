@@ -1,7 +1,6 @@
 use actix_web::{post, web, App, HttpResponse, HttpServer, Responder};
 use serde::{Deserialize, Serialize};
 
-// Definimos la estructura del JSON que enviará Locust
 #[derive(Debug, Serialize, Deserialize)]
 struct WarReport {
     country: String,
@@ -10,30 +9,42 @@ struct WarReport {
     timestamp: String,
 }
 
-// Endpoint dinámico para recibir el reporte
 #[post("/grpc-{carnet}")]
 async fn receive_report(
     path: web::Path<String>,
     report: web::Json<WarReport>,
 ) -> impl Responder {
     let carnet = path.into_inner();
-    
-    // Imprimimos el log para confirmar recepción
-    println!("Reporte recibido en /grpc-{}: {:?}", carnet, report);
+    println!("Reporte recibido de Locust en /grpc-{}: {:?}", carnet, report);
 
-    // Retornamos 200 OK
-    HttpResponse::Ok().json(serde_json::json!({
-        "status": "success",
-        "message": format!("Reporte procesado en ruta de carnet {}", carnet)
-    }))
+    // Enviar el JSON al Cliente Go (que está en Kubernetes como go-client-svc)
+    let client = reqwest::Client::new();
+    let res = client.post("http://go-client-svc:80/send")
+        .json(&report.into_inner())
+        .send()
+        .await;
+
+    match res {
+        Ok(response) => {
+            // Si Go responde bien, devolvemos su respuesta al usuario
+            let body = response.text().await.unwrap_or_default();
+            HttpResponse::Ok().content_type("application/json").body(body)
+        },
+        Err(e) => {
+            println!("Error conectando con Go Client: {}", e);
+            HttpResponse::InternalServerError().json(serde_json::json!({
+                "status": "error",
+                "message": "Fallo al comunicar con Go Client"
+            }))
+        }
+    }
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     println!("Iniciando API Rust en el puerto 8080...");
     HttpServer::new(|| {
-        App::new()
-            .service(receive_report)
+        App::new().service(receive_report)
     })
     .bind(("0.0.0.0", 8080))?
     .run()
