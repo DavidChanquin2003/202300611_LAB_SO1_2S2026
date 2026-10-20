@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: go-server
-        image: host.minikube.internal:5000/go-server:v1
+        image: host.minikube.internal:5000/go-server:v2
         ports:
         - containerPort: 50051
 ---
