@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-consumer
+  template:
+    metadata:
+      labels:
+        app: go-consumer
+    spec:
+      containers:
+      - name: go-consumer
+        image: host.minikube.internal:5000/go-consumer:v1
