@@ -1,0 +1,18 @@
+apiVersion: mumnk8s.my.domain/v1alpha1
+kind: ValkeyInstance
+metadata:
+  labels:
+    app.kubernetes.io/name: valkeyinstance
+    app.kubernetes.io/managed-by: kustomize
+  name: valkeyinstance-sample
+spec:
+  replicaCount: 1
+  image:
+    repository: valkey/valkey
+    tag: "7.2.5"
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 6379
+  persistence:
+    size: 1Gi
