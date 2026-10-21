@@ -9,6 +9,9 @@ rules:
   - valkeyinstances
   - valkeyinstances/status
   - valkeyinstances/finalizers
+  - grafanainstances
+  - grafanainstances/status
+  - grafanainstances/finalizers
   verbs:
   - create
   - delete

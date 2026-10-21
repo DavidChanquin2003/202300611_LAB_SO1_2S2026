@@ -1,0 +1,15 @@
+apiVersion: mumnk8s.my.domain/v1alpha1
+kind: GrafanaInstance
+metadata:
+  labels:
+    app.kubernetes.io/name: grafanainstance
+    app.kubernetes.io/managed-by: kustomize
+  name: grafanainstance-sample
+spec:
+  replicaCount: 1
+  image:
+    repository: grafana/grafana
+    tag: "10.4.1"
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP

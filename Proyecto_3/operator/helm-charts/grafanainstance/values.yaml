@@ -1,0 +1,7 @@
+replicaCount: 1
+image:
+  repository: grafana/grafana
+  tag: "10.4.1"
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
