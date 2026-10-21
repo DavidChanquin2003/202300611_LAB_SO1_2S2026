@@ -1,0 +1,8 @@
+#!/home/dach/Vídeos/Sopes_1/Lab/202300611_LAB_SO1_2S2026/Proyecto_3/venv/bin/python3
+# -*- coding: utf-8 -*-
+import re
+import sys
+from flask.cli import main
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(main())

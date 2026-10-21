@@ -69,7 +69,7 @@ func main() {
 
 			log.Printf("Reporte leído de RabbitMQ: País=%s", msg.Country)
 
-			// 3. Guardar el reporte en Valkey como un Stream
+			// 3. Guardar el reporte en Valkey como un Stream con campos nativos
 			err := rdb.XAdd(ctx, &redis.XAddArgs{
 				Stream: "war_reports_stream",
 				Values: map[string]interface{}{
