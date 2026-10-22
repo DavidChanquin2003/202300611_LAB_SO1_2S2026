@@ -6,12 +6,12 @@ rules:
 - apiGroups:
   - mumnk8s.my.domain
   resources:
-  - valkeyinstances
-  - valkeyinstances/status
-  - valkeyinstances/finalizers
   - grafanainstances
-  - grafanainstances/status
   - grafanainstances/finalizers
+  - grafanainstances/status
+  - valkeyinstances
+  - valkeyinstances/finalizers
+  - valkeyinstances/status
   verbs:
   - create
   - delete
@@ -24,6 +24,8 @@ rules:
   - apps
   resources:
   - deployments
+  - replicasets
+  - statefulsets
   verbs:
   - create
   - delete
@@ -35,11 +37,13 @@ rules:
 - apiGroups:
   - ""
   resources:
-  - services
   - persistentvolumeclaims
+  - persistentvolumes
+  - services
+  - pods
   - events
-  - secrets
   - configmaps
+  - secrets
   verbs:
   - create
   - delete

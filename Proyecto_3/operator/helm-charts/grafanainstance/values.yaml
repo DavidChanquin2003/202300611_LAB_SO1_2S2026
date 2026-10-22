@@ -5,3 +5,5 @@ image:
   pullPolicy: IfNotPresent
 service:
   type: ClusterIP
+persistence:
+  size: 1Gi

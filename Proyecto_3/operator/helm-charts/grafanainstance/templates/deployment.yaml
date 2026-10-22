@@ -12,6 +12,9 @@ spec:
       labels:
         app: {{ .Release.Name }}-grafana
     spec:
+      securityContext:
+        fsGroup: 472
+        runAsUser: 472
       containers:
         - name: grafana
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -21,3 +24,10 @@ spec:
           env:
             - name: GF_INSTALL_PLUGINS
               value: "redis-datasource"
+          volumeMounts:
+            - name: grafana-storage
+              mountPath: /var/lib/grafana
+      volumes:
+        - name: grafana-storage
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-grafana-pvc
