@@ -210,9 +210,6 @@ El dashboard aprovisionado de forma declarativa incluye:
         tags: [filesystem, mitre_discovery, so1]
   ```
 
-> 📸 **CAPTURA REQUERIDA:**  
-> **Instrucción:** Ejecuta un `cat /etc/shadow` dentro de un pod y toma una captura a la terminal donde tienes corriendo `kubectl logs -f -l app.kubernetes.io/name=falco -n falco` mostrando la alerta en texto.  
-> **Nombre del archivo:** `img/falco_alert.png`  
 > ![Alerta de Falco](img/falco_alert.png)
 
 ---

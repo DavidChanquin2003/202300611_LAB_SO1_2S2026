@@ -1,0 +1,11 @@
+driver:
+  kind: modern_ebpf
+
+customRules:
+  regla-mumnk8s.yaml: |-
+    - rule: Detectar Acceso a Archivo Sensible
+      desc: Alerta cuando alguien intenta leer /etc/shadow en nuestros pods
+      condition: spawned_process and proc.name = "cat" and proc.args contains "/etc/shadow"
+      output: "ALERTA SO1: Intento de lectura de /etc/shadow detectado! (usuario=%user.name pod=%k8s.pod.name)"
+      priority: WARNING
+      tags: [mumnk8s, security]
