@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasource
+data:
+  datasource.yaml: |-
+    apiVersion: 1
+    datasources:
+      - name: Redis
+        type: redis-datasource
+        uid: fg219xooswutcb
+        url: redis://valkeyinstance-sample-valkey-svc:6379
+        access: proxy
+        isDefault: true

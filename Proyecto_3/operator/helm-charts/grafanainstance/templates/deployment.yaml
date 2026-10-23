@@ -28,18 +28,24 @@ spec:
             - name: grafana-storage
               mountPath: /var/lib/grafana
             - name: dashboard-provider-volume
-              mountPath: /etc/grafana/provisioning/dashboards/dashboards.yaml
+              mountPath: /etc/grafana/provisioning/dashboards/provider.yaml
               subPath: dashboards.yaml
             - name: dashboards-volume
-              mountPath: /etc/grafana/provisioning/dashboards/mi-dashboard.json
+              mountPath: /var/dashboards/mi-dashboard.json
               subPath: mi-dashboard.json
+            - name: datasource-volume
+              mountPath: /etc/grafana/provisioning/datasources/datasource.yaml
+              subPath: datasource.yaml
       volumes:
         - name: grafana-storage
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-grafana-pvc
         - name: dashboard-provider-volume
-        configMap:
-          name: grafana-dashboard-provider
+          configMap:
+            name: grafana-dashboard-provider
         - name: dashboards-volume
-        configMap:
-          name: grafana-dashboards
+          configMap:
+            name: grafana-dashboards
+        - name: datasource-volume
+          configMap:
+            name: grafana-datasource
