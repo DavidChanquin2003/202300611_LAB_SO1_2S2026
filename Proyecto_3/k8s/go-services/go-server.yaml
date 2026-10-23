@@ -15,6 +15,7 @@ spec:
       containers:
       - name: go-server
         image: host.minikube.internal:5000/go-server:v2
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 50051
 ---

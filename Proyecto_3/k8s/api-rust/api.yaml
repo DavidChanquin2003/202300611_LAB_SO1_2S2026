@@ -15,6 +15,7 @@ spec:
       containers:
       - name: api-rust
         image: host.minikube.internal:5000/api-rust:v2
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
 ---

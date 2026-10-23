@@ -15,6 +15,7 @@ spec:
       containers:
       - name: go-client
         image: host.minikube.internal:5000/go-client:v1
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
 ---

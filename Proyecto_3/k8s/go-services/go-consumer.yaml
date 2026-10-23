@@ -14,4 +14,5 @@ spec:
     spec:
       containers:
       - name: go-consumer
-        image: host.minikube.internal:5000/go-consumer:v3
+        image: host.minikube.internal:5000/go-consumer:v2
+        imagePullPolicy: IfNotPresent
